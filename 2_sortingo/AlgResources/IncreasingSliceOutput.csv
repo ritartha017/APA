@@ -1,6 +1,0 @@
-QS - IncreasingSliceOutput
-,Size,Swaps,Comparisons,Time
-1,10,9,63,498ns
-2,100,99,5148,16.319µs
-3,1000,999,501498,1.962942ms
-4,10000,9999,50014998,163.791466ms

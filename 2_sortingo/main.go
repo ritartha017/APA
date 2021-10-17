@@ -31,15 +31,21 @@ func decreasingSlicegenerator(slice []int, size int) []int {
 	return slice
 }
 
-func performTesting(arr []int, n int, order string) U.Resources {
+func performTesting(arr []int, n int, order string, algorithm string) U.Resources {
 	var resources U.Resources
+	var start time.Time
+	var end time.Duration
 	U.Swaps, U.Comparisons = 0, 0
 
-	start := time.Now()
-	S.QuickSort(arr, 0, n-1)
-	// S.MergeSort(arr)
-	end := time.Since(start)
-
+	if algorithm == "QS" {
+		start = time.Now()
+		S.QuickSort(arr, 0, n-1)
+		end = time.Since(start)
+	} else if algorithm == "MS" {
+		start = time.Now()
+		S.MergeSort(arr)
+		end = time.Since(start)
+	}
 	resources.SortingOrder = order
 	resources.Size = n
 	resources.Time = end
@@ -50,44 +56,87 @@ func performTesting(arr []int, n int, order string) U.Resources {
 }
 
 func main() {
-	var qSRandomSliceResources, qSIncreasingSliceResources, qSDecreasingSliceResources []U.Resources
+	var RandomSliceResources, IncreasingSliceResources, DecreasingSliceResources []U.Resources
 	var table string
 
 	var repetitions int = 4
 	var iterations int = 0
 	var n int = 10
 
+	var algName string = "QS"
+	// -----------------------------------------------QS---------------------------------------------
+
 	for iterations < repetitions {
 		arr := make([]int, n, n)
 
 		randomSlicegenerator(arr, n)
 		// Resources taken by QS for random input
-		res1 := performTesting(arr, n, "random")
-		qSRandomSliceResources = append(qSRandomSliceResources, res1)
+		res1 := performTesting(arr, n, "random", algName)
+		RandomSliceResources = append(RandomSliceResources, res1)
 
 		increasingSlicegenerator(arr, n)
 		// Resources taken by QS for increasing input
-		res2 := performTesting(arr, n, "increasing")
-		qSIncreasingSliceResources = append(qSIncreasingSliceResources, res2)
+		res2 := performTesting(arr, n, "increasing", algName)
+		IncreasingSliceResources = append(IncreasingSliceResources, res2)
 
 		decreasingSlicegenerator(arr, n)
 		// Resources taken by QS for decreasing input
-		res3 := performTesting(arr, n, "decreasing")
-		qSDecreasingSliceResources = append(qSDecreasingSliceResources, res3)
+		res3 := performTesting(arr, n, "decreasing", algName)
+		DecreasingSliceResources = append(DecreasingSliceResources, res3)
 
 		n *= 10
 		iterations++
 	}
-	table = U.ToTable(qSRandomSliceResources, "QS - RandomSliceOutput")
-	U.ToCSV(table, "RandomSliceOutput")
+	table = U.ToTable(RandomSliceResources, algName+" - RandomSliceOutput")
+	U.ToCSV(table, algName+"RandomSliceOutput")
 
-	table = U.ToTable(qSIncreasingSliceResources, "QS - IncreasingSliceOutput")
-	U.ToCSV(table, "IncreasingSliceOutput")
+	table = U.ToTable(IncreasingSliceResources, algName+" - IncreasingSliceOutput")
+	U.ToCSV(table, algName+"IncreasingSliceOutput")
 
-	table = U.ToTable(qSDecreasingSliceResources, "QS - DecreasingSliceOutput")
-	U.ToCSV(table, "DecreasingSliceOutput")
+	table = U.ToTable(DecreasingSliceResources, algName+" - DecreasingSliceOutput")
+	U.ToCSV(table, algName+"DecreasingSliceOutput")
 
-	U.DrawTimeChart(qSRandomSliceResources, qSIncreasingSliceResources, qSDecreasingSliceResources, "QS")
-	U.DrawSwapsChart(qSRandomSliceResources, qSIncreasingSliceResources, qSDecreasingSliceResources, "QS")
-	U.DrawComparisonsChart(qSRandomSliceResources, qSIncreasingSliceResources, qSDecreasingSliceResources, "QS")
+	U.DrawTimeChart(RandomSliceResources, IncreasingSliceResources, DecreasingSliceResources, algName)
+	U.DrawSwapsChart(RandomSliceResources, IncreasingSliceResources, DecreasingSliceResources, algName)
+	U.DrawComparisonsChart(RandomSliceResources, IncreasingSliceResources, DecreasingSliceResources, algName)
+
+	// -----------------------------------------------MS---------------------------------------------
+
+	RandomSliceResources, IncreasingSliceResources, DecreasingSliceResources = nil, nil, nil
+	repetitions = 4
+	iterations = 0
+	n = 10
+
+	algName = "MS"
+
+	for iterations < repetitions {
+		arr := make([]int, n, n)
+
+		randomSlicegenerator(arr, n)
+		res1 := performTesting(arr, n, "random", algName)
+		RandomSliceResources = append(RandomSliceResources, res1)
+
+		increasingSlicegenerator(arr, n)
+		res2 := performTesting(arr, n, "increasing", algName)
+		IncreasingSliceResources = append(IncreasingSliceResources, res2)
+
+		decreasingSlicegenerator(arr, n)
+		res3 := performTesting(arr, n, "decreasing", algName)
+		DecreasingSliceResources = append(DecreasingSliceResources, res3)
+
+		n *= 10
+		iterations++
+	}
+	table = U.ToTable(RandomSliceResources, algName+" - RandomSliceOutput")
+	U.ToCSV(table, algName+"RandomSliceOutput")
+
+	table = U.ToTable(IncreasingSliceResources, algName+" - IncreasingSliceOutput")
+	U.ToCSV(table, algName+"IncreasingSliceOutput")
+
+	table = U.ToTable(DecreasingSliceResources, algName+" - DecreasingSliceOutput")
+	U.ToCSV(table, algName+"DecreasingSliceOutput")
+
+	U.DrawTimeChart(RandomSliceResources, IncreasingSliceResources, DecreasingSliceResources, algName)
+	U.DrawSwapsChart(RandomSliceResources, IncreasingSliceResources, DecreasingSliceResources, algName)
+	U.DrawComparisonsChart(RandomSliceResources, IncreasingSliceResources, DecreasingSliceResources, algName)
 }
