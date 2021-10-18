@@ -1,0 +1,6 @@
+Pancakesort - RandomSliceOutput
+,Size,Swaps,Comparisons,Time,AddlMemory(B)
+1,10,30,0,1.275µs,0
+2,100,3750,0,42.322µs,0
+3,1000,351733,0,2.210974ms,0
+4,10000,32335113,0,222.252835ms,0

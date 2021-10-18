@@ -13,11 +13,10 @@ func ToTable(arr []Resources, tableName string) string {
 	t.SetTitle(tableName)
 	t.SetAutoIndex(true)
 	t.SetOutputMirror(os.Stdout)
-	t.AppendHeader(table.Row{"Size", "Swaps", "Comparisons", "Time"})
-
+	t.AppendHeader(table.Row{"Size", "Swaps", "Comparisons", "Time", "AddlMemory(B)"})
 	for i := 0; i < len(arr); i++ {
 		t.AppendRows([]table.Row{
-			{arr[i].Size, arr[i].Swaps, arr[i].Comparisons, arr[i].Time},
+			{arr[i].Size, arr[i].Swaps, arr[i].Comparisons, arr[i].Time, arr[i].AddlMemory},
 		})
 	}
 	t.SetStyle(table.StyleColoredBright)

@@ -10,6 +10,8 @@ type Resources struct {
 	Swaps        int
 	Comparisons  int
 	Time         time.Duration
+	AddlMemory   uintptr
 }
 
 var Swaps, Comparisons int
+var AddlMemory uintptr

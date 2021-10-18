@@ -2,10 +2,10 @@ package sort
 
 import (
 	U "../utils"
+	"unsafe"
 )
 
 func MergeSort(slice []int) []int {
-
 	if len(slice) < 2 {
 		return slice
 	}
@@ -14,7 +14,6 @@ func MergeSort(slice []int) []int {
 }
 
 func Merge(left, right []int) []int {
-
 	size, i, j := len(left)+len(right), 0, 0
 	slice := make([]int, size, size)
 
@@ -40,5 +39,6 @@ func Merge(left, right []int) []int {
 			U.Swaps++
 		}
 	}
+	U.AddlMemory = unsafe.Sizeof(slice) + uintptr(size)*unsafe.Sizeof(size)
 	return slice
 }

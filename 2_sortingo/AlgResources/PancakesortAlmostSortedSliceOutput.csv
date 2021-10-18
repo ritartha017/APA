@@ -1,0 +1,6 @@
+Pancakesort - AlmostSortedSliceOutput
+,Size,Swaps,Comparisons,Time,AddlMemory(B)
+1,10,24,0,744ns,0
+2,100,2755,0,23.064µs,0
+3,1000,262345,0,2.112303ms,0
+4,10000,11495659,0,132.012437ms,0

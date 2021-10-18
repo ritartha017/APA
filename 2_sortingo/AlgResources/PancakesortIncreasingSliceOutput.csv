@@ -1,0 +1,6 @@
+Pancakesort - IncreasingSliceOutput
+,Size,Swaps,Comparisons,Time,AddlMemory(B)
+1,10,0,0,411ns,0
+2,100,0,0,10.485µs,0
+3,1000,0,0,1.075217ms,0
+4,10000,0,0,83.090596ms,0

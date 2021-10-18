@@ -1,0 +1,9 @@
+CS - DecreasingSliceOutput
+,Size,Swaps,Comparisons,Time,AddlMemory(B)
+1,10,0,0,0s,0
+2,100,0,0,0s,0
+3,1000,0,0,0s,0
+4,10000,0,0,0s,0
+5,100000,0,0,0s,0
+6,1000000,0,0,0s,0
+7,10000000,0,0,0s,0

@@ -2,35 +2,30 @@ package sort
 
 import (
 	U "../utils"
+	"unsafe"
 )
 
-func partition(array []int, start int, end int) int {
-	pivot_index := start
-	pivot := array[pivot_index]
-	for start < end {
-		for start < len(array) && array[start] <= pivot {
-			start = start + 1
-			U.Comparisons += 2
-		}
-		for array[end] > pivot {
-			end = end - 1
+func partition(a []int, lo, hi int) int {
+	p := a[hi]
+	for j := lo; j < hi; j++ {
+		if a[j] < p {
+			a[j], a[lo] = a[lo], a[j]
+			lo++
 			U.Comparisons++
-		}
-		if start < end {
-			array[start], array[end] = array[end], array[start]
 			U.Swaps++
-			U.Comparisons++
 		}
 	}
-	array[end], array[pivot_index] = array[pivot_index], array[end]
+
+	a[lo], a[hi] = a[hi], a[lo]
 	U.Swaps++
-	return end
+	return lo
 }
 
-func QuickSort(array []int, start int, end int) {
-	if start < end {
-		p := partition(array, start, end)
-		QuickSort(array, start, p-1)
-		QuickSort(array, p+1, end)
+func QuickSort(a []int, lo, hi int) {
+	if lo < hi {
+		p := partition(a, lo, hi)
+		QuickSort(a, lo, p-1)
+		QuickSort(a, p+1, hi)
+		U.AddlMemory += unsafe.Sizeof(lo)
 	}
 }
