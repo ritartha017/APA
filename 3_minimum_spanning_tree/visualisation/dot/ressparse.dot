@@ -1,0 +1,24 @@
+graph  {
+	
+	n1[color="#84a598",label="0"];
+	n2[color="#84a598",label="1"];
+	n3[label="2"];
+	n7[label="3"];
+	n4[label="4"];
+	n8[label="5"];
+	n9[label="6"];
+	n5[label="7"];
+	n10[label="8"];
+	n6[label="9"];
+	n1--n2[color="#d3869b",label="1"];
+	n1--n3[color="#d3869b",label="1"];
+	n1--n4[color="#d3869b",label="7"];
+	n1--n5[color="#d3869b",label="7"];
+	n1--n6[color="#d3869b",label="5"];
+	n2--n7[color="#d3869b",label="8"];
+	n2--n8[color="#d3869b",label="2"];
+	n2--n9[color="#d3869b",label="1"];
+	n2--n10[color="#d3869b",label="1"];
+	
+}
+
